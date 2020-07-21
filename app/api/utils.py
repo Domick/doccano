@@ -472,16 +472,25 @@ class JSONPainter(object):
         serializer = DocumentSerializer(documents, many=True)
         data = []
         for d in serializer.data:
-            labels = []
+            labels = {}
             for a in d['annotations']:
                 label_obj = [x for x in serializer_labels.data if x['id'] == a['label']][0]
                 label_text = label_obj['text']
                 label_start = a['start_offset']
                 label_end = a['end_offset']
-                labels.append([label_start, label_end, label_text])
+                if labels.get(label_text, None):
+                    labels[label_text].append([label_start, label_end])
+                else:
+                    labels[label_text] = [[label_start, label_end]]
+
+                # labels.append([label_start, label_end, label_text])
             d.pop('annotations')
+            d.pop('id')
+            d.pop('annotation_approver')
+            d.pop('meta')
+            d['content'] = d.pop('text')
             d['labels'] = labels
-            d['meta'] = json.loads(d['meta'])
+            # d['meta'] = json.loads(d['meta'])
             data.append(d)
         return data
 
