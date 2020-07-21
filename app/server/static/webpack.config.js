@@ -25,7 +25,7 @@ module.exports = {
     mode: devMode ? 'development' : 'production',
     entry: entryPoints,
     output: {
-        publicPath: hotReload ? `http://10.40.60.54:8005/` : '',
+        publicPath: hotReload ? `http://10.40.60.54:${webpackPort}/` : '',
         path: path.join(__dirname, 'bundle'),
         filename: '[name].js'
     },
