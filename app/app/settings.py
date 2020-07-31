@@ -33,7 +33,7 @@ SECRET_KEY = env('SECRET_KEY',
                  'v8sk33sy82!uw3ty=!jjv5vp7=s2phrzw(m(hrn^f7e_#1h2al')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env.bool('DEBUG', False)
+DEBUG = env.bool('DEBUG', True)
 
 # True if you want to allow users to be able to create an account
 ALLOW_SIGNUP = env.bool('ALLOW_SIGNUP', True)
